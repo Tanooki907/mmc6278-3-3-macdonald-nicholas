@@ -12,9 +12,13 @@ The only downside to the Heroku free tier is that your app will "spin down" afte
 &nbsp;
 ## Setup
 
-Navigate to the [Heroku](https://www.heroku.com/) homepage and sign up for a free account. 
+Navigate to the [Heroku](https://www.heroku.com/) homepage and sign up for an account.
 
-After creating an account, install the Heroku CLI. In your terminal, run:
+Using your student email, sign up for the [GitHub Student Developer Pack](https://education.github.com/pack).
+
+**NOTE:** Heroku **used** to be a "freemium" resource, but have recently eliminated all of their free plans for hosting. You do get free Heroku credits with the GitHub student dev pack however which you can use to complete and deploy your coursework without paying anything out of pocket.
+
+After creating a Heroku account, install the Heroku CLI. In your terminal, run:
 
 ```
 npm i -g heroku
@@ -63,6 +67,30 @@ git push heroku master
 ```
 
 This will push your latest git commit to Heroku for deployment. You can technically push any branch you would like to Heroku, but I recommend sticking to your default branch.
+
+&nbsp;
+## Dynos (How to make your free Heroku credits last a long time)
+
+Heroku calls its environments where we deploy our code "dynos". This also is how Heroku denotes the payment model for each project you deploy.
+
+Under the "overview" tab of each project page, there is a section titled "Dyno Formation". You want to set this to an "eco dyno", which is what Heroku is now calling what used to be its free tier of service.
+
+An eco dyno "spins up" when a request comes in after a long period of inactivity, and spins down when requests stop coming in to save resources and the expense of a long initial load time. More importantly, eco dynos share a resource count across your account. This means that you can have as many eco dynos as you want as long as they only consume 1000 hours of runtime a month. This should be plenty of time for all of your projects.
+
+The eco dyno plan only costs $5 per month for unlimited apps/1000 hours of runtime, but deployed apps default to "Basic", which is $7/month per application.
+
+**Be sure to set all of your projects to the "Eco" dyno type so your projects use as few dollars/credits as possible. Otherwise you'll burn through your free Heroku credits quickly.**
+
+&nbsp;
+## Handling Environmental Variables (.env)
+
+Starting with module 3's assignment, you'll notice that most assignments contain a `.env` file for environmental variables (values that change for the program depending on where the program is running). This file is used to share sensitive variables with your application **on your machine only**. Any `process.env.VAR_NAME` lines in the server-side JavaScript are converted/attached to `process.env` from the `.env` file by the [dotenv](https://www.npmjs.com/package/dotenv) package.
+
+However, the `.env` must **NOT** be pushed to GitHub or Heroku, and that is why each assignment asks you to ensure `.env` is listed in the `.gitignore` file. Environmental variables are usually sensitive values like API keys, and so we don't want to post those publicly on GitHub.
+
+When deploying to Heroku, because the `.env` is ignored with Git, Heroku won't have access to those values. However, Heroku has a different method for handling environmental variables. **Any `.env` file variables must be added to your Heroku project through the settings tab.** Click the "reveal config vars" option in settings, and you will see a place to add key/value pairs. The key would be the part before the `=` in the env file, and the value the part after.
+
+If you add env vars to Heroku after deploying, you'll need to either re-deploy or click "restart all dynos" in the "more" drop-down in the top right of your project page in the Heroku dashboard. This is because the environmental variables are read into the application on startup in Heroku.
 
 &nbsp;
 ## Troubleshooting

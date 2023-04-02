@@ -33,21 +33,19 @@ app.get('/style.css', (req, res) => {
 app.get('/api/city/:city', async (req, res) => {
     try {
         //let [cityInfo, jobs] = await Promise.all([util.getCityInfo(req), util.getJobs(req)])
-        let cityInfo = await util.getCityInfo(req)
-        let jobs = await util.getJobs(req)
+        var cityInfo = await util.getCityInfo(req.params.city)
+        var jobs = await util.getJobs(req.params.city)
         if (!cityInfo && !jobs){
             throw new Error
         }
-        res.json({
-            cityInfo,
-            jobs
+        return res.status(200).json({
+            cityInfo: cityInfo,
+            jobs: jobs
         })
-        console.log(res.json)
     }catch (err){
         res.status(404).json({
             error: err
         })
-        return res.status(404).end()
     }
     }
 )

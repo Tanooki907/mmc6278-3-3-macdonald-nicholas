@@ -29,13 +29,11 @@ async function getCityInfo(location) {
     const searchResults = data._embedded && data._embedded["city:search-results"]
     const city = searchResults.length > 0 && searchResults[0]._embedded["city:item"]
     if (!city) throw new Error('City not found')
-    const scores = city
-      && city._embedded
-      && city._embedded["city:urban_area"]._embedded["ua:scores"]
+    const scores = city?._embedded?.["city:urban_area"]?._embedded?.["ua:scores"]
     if (!scores) throw new Error('No scores for this city')
     return scores
   } catch(err) {
-    //console.log(err.data || err.message)
+    // console.log(err.data || err.message)
     return false
   }
 }

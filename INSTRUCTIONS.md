@@ -23,6 +23,8 @@ Run `npm i` in the root directory of your repository (your `package.json` should
 
 You'll see that there is a `.env.EXAMPLE` file included in the unsolved folder. You'll need to create a `.env` file with the same contents, but replace the fake API key with your actual API key. You can obtain an API key for the Findwork API from [Findwork API](https://findwork.dev/developers).
 
+**NOTE:** If you do not see the `.env.EXAMPLE` file on your machine, note that files starting with a period (AKA "dotfiles") are hidden by default on some file systems (Macs in particular). Changing your OS settings to "view hidden files and folders" should allow you to see the file. Dotfiles are typically used for configuration and so are usually hidden by default. These files should appear in VS Code by default, however.
+
 &nbsp;
 ## Instructions
 
@@ -34,9 +36,11 @@ The front-end code for the application is already completed. Your job is to fill
 
 Look inside the `app.js` file for comments explaining what code is missing from the application.
 
-[You can see an example of the completed application here](https://should-you-relocate.herokuapp.com/). You may also view the api [endpoint results](https://should-you-relocate.herokuapp.com/api/city/chicago).
+[You can see an example of the completed application here](https://should-you-relocate.herokuapp.com/). You may also view an [example of the api endpoint results here](https://should-you-relocate.herokuapp.com/api/city/chicago).
 
 Your finished application must be deployed to [Heroku](https://www.heroku.com/). For instructions on deploying to Heroku, please see [this document](./Heroku_Deployment.md).
+
+**NOTE:** Don't forget to add your Jobs API key environmental variable to Heroku. If you forget, your deployed site will not return any job data. Sometimes this is normal for smaller cities, so test with big cities like "los angeles" to make sure your app is functioning correctly. 
 
 &nbsp;
 ## App Behavior
